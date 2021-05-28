@@ -12,10 +12,12 @@ export async function authenticateToken(
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
 
-  if (!token) throw new ErrorHandler(MiddlewareError.InvalidToken);
+  if (!token) {
+    return next(new ErrorHandler(MiddlewareError.InvalidToken));
+  }
 
   verifyToken(token, async (err, payload: any) => {
-    if (err) throw new ErrorHandler(MiddlewareError.InvalidToken);
+    if (err) return next(new ErrorHandler(MiddlewareError.InvalidToken));
 
     const user = await User.findById(payload.sub);
     req.user = user;
