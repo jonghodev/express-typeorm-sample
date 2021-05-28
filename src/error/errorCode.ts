@@ -8,4 +8,8 @@ export const Errors = {
     message: 'Internal server error occured.',
     statusCode: 500,
   },
+  NotFound: {
+    message: 'Internal server error occured.',
+    statusCode: 500,
+  },
 };

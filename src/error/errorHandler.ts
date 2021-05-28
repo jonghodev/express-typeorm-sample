@@ -14,8 +14,6 @@ export class ErrorHandler extends Error {
 }
 
 export function handleError(err: Error, res: Response) {
-  console.error(err);
-
   if (err instanceof ValidationError) {
     return res.status(err.statusCode).json(err);
   } else if (err instanceof ErrorHandler) {
@@ -27,6 +25,7 @@ export function handleError(err: Error, res: Response) {
       timestamp: new Date().toISOString(),
     });
   } else {
+    console.error(err);
     const { message, statusCode } = Errors.InternalError;
 
     res.status(statusCode).json({
