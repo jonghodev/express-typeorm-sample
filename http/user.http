@@ -1,0 +1,8 @@
+POST {{host}}/user/signup
+Content-Type: application/json
+
+{
+  "username": "jongjjang03",
+  "password": "Wldms0302!",
+  "name": "jongho"
+}
