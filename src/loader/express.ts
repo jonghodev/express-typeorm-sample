@@ -1,6 +1,7 @@
 import express, { NextFunction, Request, Response } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+import morganBody from 'morgan-body';
 import { router } from '../domain';
 import { handleError } from '../error/errorHandler';
 
@@ -16,6 +17,7 @@ export function runExpress() {
   app.use(cors());
 
   app.use(morgan('combined'));
+  morganBody(app);
 
   app.use(router);
 
