@@ -4,7 +4,7 @@
   "description": "Nodejs Server Application",
   "main": "src/index.ts",
   "scripts": {
-    "dev": "NODE_ENV=dev nodemon --files src/index.ts",
+    "dev": "TS_NODE_TRANSPILE_ONLY=true NODE_ENV=dev nodemon --exec ts-node -r tsconfig-paths/register --files src/index.ts",
     "build": "tsc",
     "prettier": "prettier --write ."
   },
@@ -40,6 +40,7 @@
     "nodemon": "^2.0.7",
     "prettier": "2.3.0",
     "ts-node": "^10.0.0",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "^4.3.2"
   }
 }

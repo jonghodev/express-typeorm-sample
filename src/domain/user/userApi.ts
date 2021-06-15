@@ -23,7 +23,6 @@ router.post('/signup', validate(signupValidation), async (req, res, next) => {
 
     const findUser = await User.findByUsername(username);
 
-    console.log(findUser);
     if (findUser) {
       throw new ErrorHandler(UserError.AccountAlreadyRegistered);
     }
