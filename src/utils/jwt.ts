@@ -1,11 +1,12 @@
 import jwt, { VerifyCallback } from 'jsonwebtoken';
+import config from 'src/utils/config';
 
 export function createToken(payload: Record<string, any>) {
-  return jwt.sign(payload, String(process.env.JWT_SECRET), {
+  return jwt.sign(payload, config.jwtSecret, {
     expiresIn: '7d',
   });
 }
 
 export function verifyToken(token: string, fn: VerifyCallback) {
-  jwt.verify(token, String(process.env.JWT_SECRET), fn);
+  jwt.verify(token, config.jwtSecret, fn);
 }

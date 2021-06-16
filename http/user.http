@@ -2,7 +2,7 @@ POST {{host}}/user/signup
 Content-Type: application/json
 
 {
-  "username": "jongjjang03",
+  "email": "jongjjang03@naver.com",
   "password": "Wldms0302!",
   "name": "jongho"
 }
@@ -13,7 +13,7 @@ POST {{host}}/user/login
 Content-Type: application/json
 
 {
-  "username": "jongjjang03",
+  "email": "jongjjang03@naver.com",
   "password": "Wldms0302!"
 }
 

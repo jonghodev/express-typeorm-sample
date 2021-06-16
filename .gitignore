@@ -1,4 +1,8 @@
-.env.dev
+# config
+config/.env.dev
+config/.env.stg
+config/.env.prod
+
 .DS_STORE
 node_modules
 .idea

@@ -2,21 +2,21 @@ import express, { NextFunction, Request, Response } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import morganBody from 'morgan-body';
-import { router } from '../domain';
-import { handleError } from '../error/errorHandler';
+import { router } from './domain';
+import { handleError } from './error/errorHandler';
+import { myStream } from './utils/logger';
 
 /**
- * Express App 서버를 실행한다.
+ * Express App 을 반환한다.
  */
-export function runExpress() {
-  const { PORT } = process.env;
+export function createServer() {
   const app = express();
 
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
   app.use(cors());
 
-  app.use(morgan('combined'));
+  app.use(morgan('combined', { stream: myStream }));
   morganBody(app);
 
   app.use(router);
@@ -25,7 +25,5 @@ export function runExpress() {
     handleError(error, res);
   });
 
-  app.listen(PORT, () => {
-    console.log(`Server listen on port: ${PORT}`);
-  });
+  return app;
 }

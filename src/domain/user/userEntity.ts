@@ -1,26 +1,63 @@
-import mongoose, { Schema, Document, Model } from 'mongoose';
+import { model, Schema, Document, Model } from 'mongoose';
+import bcrypt from 'bcrypt';
+import validator from 'validator';
 
-export interface IUser extends Document {
-  username: string;
+interface IUserDocument extends Document {
+  email: string;
   password: string;
   name: string;
   isAdmin: boolean;
 }
 
-const UserSchema: Schema = new Schema({
-  username: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  name: { type: String, required: true },
-  isAdmin: { type: Boolean, required: true, default: false },
-});
-
-UserSchema.statics.findByUsername = async function (username: string) {
-  const user = await this.findOne({ username });
-  return user;
-};
-
-interface IUserModel extends Model<IUser> {
-  findByUsername: (username: string) => Promise<IUser | null>;
+export interface IUser extends IUserDocument {
+  comparePassword(password: string): Promise<boolean>;
 }
 
-export const User = mongoose.model<IUser, IUserModel>('User', UserSchema);
+const UserSchema = new Schema<IUser>(
+  {
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+      validate: [validator.isEmail, 'do not match email regex'],
+    },
+    password: { type: String, required: true },
+    name: { type: String, required: true },
+    isAdmin: { type: Boolean, required: true, default: false },
+  },
+  { timestamps: true },
+);
+
+interface IUserModel extends Model<IUser> {
+  findByEmail: (email: string) => Promise<IUser | null>;
+}
+
+/**
+ * Pre Method
+ */
+UserSchema.pre<IUserDocument>('save', async function (next) {
+  if (this.isModified('password')) {
+    this.password = await bcrypt.hash(this.password, 5);
+  } else {
+    next();
+  }
+});
+
+/**
+ * Static Method
+ */
+UserSchema.statics.findByEmail = async function (email: string) {
+  return this.findOne({ email });
+};
+
+/**
+ * Internal Method
+ */
+UserSchema.methods.comparePassword = async function (
+  candidatePassword: string,
+): Promise<boolean> {
+  return bcrypt.compare(candidatePassword, this.password);
+};
+
+export const User = model<IUser, IUserModel>('User', UserSchema);

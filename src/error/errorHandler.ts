@@ -1,6 +1,7 @@
 import { Response } from 'express';
 import { Errors, ErrorBody } from './errorCode';
 import { ValidationError } from 'express-validation';
+import logger from '../utils/logger';
 
 export class ErrorHandler extends Error {
   message: string;
@@ -25,7 +26,7 @@ export function handleError(err: Error, res: Response) {
       timestamp: new Date().toISOString(),
     });
   } else {
-    console.error(err);
+    logger.error(err);
     const { message, statusCode } = Errors.InternalError;
 
     res.status(statusCode).json({
