@@ -1,6 +1,7 @@
 import * as dotenv from 'dotenv';
 import * as path from 'path';
 import dotenvParseVariables from 'dotenv-parse-variables';
+import { NodeEnv } from '@/utils/constants';
 
 const { NODE_ENV } = process.env;
 
@@ -10,13 +11,13 @@ const { NODE_ENV } = process.env;
 const configPath = process.cwd() + '/config';
 let envFileName = '';
 
-if (NODE_ENV === 'dev') {
+if (NODE_ENV === NodeEnv.Dev) {
   envFileName = '.env.dev';
-} else if (NODE_ENV === 'test') {
+} else if (NODE_ENV === NodeEnv.Test) {
   envFileName = '.env.test';
-} else if (NODE_ENV === 'stg') {
+} else if (NODE_ENV === NodeEnv.Stg) {
   envFileName = '.env.stg';
-} else if (NODE_ENV === 'prod') {
+} else if (NODE_ENV === NodeEnv.Prod) {
   envFileName = '.env.prod';
 }
 
