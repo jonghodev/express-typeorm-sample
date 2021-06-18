@@ -1,5 +1,5 @@
 import winston from 'winston';
-import config from 'src/utils/config';
+import config from '@/utils/config';
 
 const prettyJson = winston.format.printf((info) => {
   if (info.message.constructor === Object) {

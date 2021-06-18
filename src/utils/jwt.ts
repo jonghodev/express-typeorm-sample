@@ -1,5 +1,5 @@
 import jwt, { VerifyCallback } from 'jsonwebtoken';
-import config from 'src/utils/config';
+import config from '@/utils/config';
 
 export function createToken(payload: Record<string, any>) {
   return jwt.sign(payload, config.jwtSecret, {

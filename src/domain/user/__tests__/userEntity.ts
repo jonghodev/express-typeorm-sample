@@ -1,6 +1,6 @@
 import faker from 'faker';
-import db from 'src/utils/db';
-import { User } from 'src/domain/user/userEntity';
+import db from '@/utils/db';
+import { User } from '@/domain/user/userEntity';
 
 beforeAll(async () => {
   await db.open();

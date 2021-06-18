@@ -1,9 +1,9 @@
 import faker from 'faker';
 import request from 'supertest';
 import { Express } from 'express';
-import db from 'src/utils/db';
-import { createServer } from 'src/express';
-import { createDummyUser } from 'src/tests/userDummy';
+import db from '@/utils/db';
+import { createServer } from '@/express';
+import { createDummyUser } from '@/tests/userDummy';
 
 let server: Express;
 beforeAll(async () => {

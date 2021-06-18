@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import logger from './logger';
-import config from 'src/utils/config';
+import config from '@/utils/config';
 
 class MongoConnection {
   private static _instance: MongoConnection;
