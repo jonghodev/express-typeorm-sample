@@ -4,6 +4,7 @@ import { Express } from 'express';
 import db from '@/utils/db';
 import { createServer } from '@/express';
 import { createDummyUser } from '@/tests/userDummy';
+import { login } from '@/domain/user/userService';
 
 let server: Express;
 beforeAll(async () => {
@@ -52,6 +53,21 @@ describe('POST /user/login', () => {
         expect(res.body.token).toMatch(
           /^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/,
         );
+      });
+  });
+});
+
+describe('GET /user', () => {
+  it('should return user', async () => {
+    const dummy = await createDummyUser();
+    const res = await login(dummy.email, dummy.password);
+
+    await request(server)
+      .get(`/user`)
+      .set('Authorization', 'Bearer ' + res.token)
+      .expect(200)
+      .then((res) => {
+        expect(res.body._id).toBe(dummy.id);
       });
   });
 });

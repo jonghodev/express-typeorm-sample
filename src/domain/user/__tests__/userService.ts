@@ -33,7 +33,7 @@ describe('signup', () => {
 });
 
 describe('login', () => {
-  it('should return JWT token, userId, expireAt to a valid login/password', async () => {
+  it('should return JWT token, user to a valid login/password', async () => {
     const dummy = await createDummyUser();
     const res = await login(dummy.email, dummy.password);
 
@@ -41,5 +41,11 @@ describe('login', () => {
     expect(res.token).toMatch(
       /^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/,
     );
+  });
+
+  it('should not login with wrong password', async () => {
+    const dummy = await createDummyUser();
+    User.findByEmail = jest.fn().mockResolvedValue(dummy);
+    await expect(login(dummy.email, 'wrong pw')).rejects.toThrowError();
   });
 });
