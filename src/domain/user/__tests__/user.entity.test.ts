@@ -1,13 +1,13 @@
 import faker from 'faker';
-import db from '@/utils/db';
-import { User } from '@/domain/user/userEntity';
+import mongo from '@/utils/mongo';
+import { User } from '@/domain/user/user.entity';
 
 beforeAll(async () => {
-  await db.open();
+  await mongo.open();
 });
 
 afterAll(async () => {
-  await db.close();
+  await mongo.close();
 });
 
 describe('save', () => {

@@ -1,13 +1,13 @@
-import { User } from './userEntity';
-import { ErrorHandler } from '../../error';
-import { UserError } from './userError';
-import { createToken } from '../../utils/jwt';
+import { User } from './user.entity';
+import { UserError } from './user.error';
+import { CustomError } from '@/error';
+import { createJwtToken } from '@/utils/jwt';
 
 export async function signup(email: string, password: string, name: string) {
   const findUser = await User.findByEmail(email);
 
   if (findUser) {
-    throw new ErrorHandler(UserError.AccountAlreadyRegistered);
+    throw new CustomError(UserError.AccountAlreadyRegistered);
   }
 
   const user = await User.create({
@@ -22,18 +22,18 @@ export async function login(email: string, password: string) {
   const user = await User.findByEmail(email);
 
   if (!user) {
-    throw new ErrorHandler(UserError.AccountNotRegistered);
+    throw new CustomError(UserError.AccountNotRegistered);
   }
 
   const isSamePassword = await user.comparePassword(password);
   if (!isSamePassword) {
-    throw new ErrorHandler(UserError.IncorrectPassword);
+    throw new CustomError(UserError.IncorrectPassword);
   }
 
   const payload = {
     sub: user.id,
   };
 
-  const token = createToken(payload);
+  const token = createJwtToken(payload);
   return { user, token };
 }

@@ -1,5 +1,5 @@
-import { User } from '@/domain/user/userEntity';
-import { login } from '@/domain/user/userService';
+import { User } from '@/domain/user/user.entity';
+import { login } from '@/domain/user/user.service';
 import { dummyUser } from '@/tests/userDummy';
 
 describe('login', () => {

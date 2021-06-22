@@ -1,7 +1,7 @@
 import express from 'express';
 import { Joi, validate } from 'express-validation';
-import { authenticateToken } from '../../middleware/authentication';
-import { login, signup } from './userService';
+import { login, signup } from './user.service';
+import { verifyToken } from '@/middleware/authentication';
 
 const router = express.Router();
 
@@ -54,7 +54,7 @@ router.post('/login', validate(loginValidation), async (req, res, next) => {
 /**
  * Get User API
  */
-router.get('/', authenticateToken, async (req, res, next) => {
+router.get('/', verifyToken, async (req, res, next) => {
   try {
     const user = req.user;
     res.status(200).json(user);

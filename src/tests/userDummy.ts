@@ -1,5 +1,5 @@
 import faker from 'faker';
-import { User } from '@/domain/user/userEntity';
+import { User } from '@/domain/user/user.entity';
 
 interface DummyUser {
   id: string;

@@ -2,7 +2,7 @@ import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import morganBody from 'morgan-body';
 import { router } from './domain';
-import { handleError } from './error/errorHandler';
+import { handleError } from './error/custom.error';
 import { morganBodyOptions } from './utils/logger';
 
 /**

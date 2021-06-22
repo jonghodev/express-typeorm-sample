@@ -1,9 +1,9 @@
 import { Response } from 'express';
-import { Errors, ErrorBody } from './errorCode';
+import { CommonError, ErrorBody } from './common.error';
 import { ValidationError } from 'express-validation';
-import logger from '../utils/logger';
+import logger from '@/utils/logger';
 
-export class ErrorHandler extends Error {
+export class CustomError extends Error {
   message: string;
   statusCode: number;
 
@@ -17,7 +17,7 @@ export class ErrorHandler extends Error {
 export function handleError(err: Error, res: Response) {
   if (err instanceof ValidationError) {
     return res.status(err.statusCode).json(err);
-  } else if (err instanceof ErrorHandler) {
+  } else if (err instanceof CustomError) {
     const { message, statusCode } = err;
 
     res.status(statusCode).json({
@@ -27,12 +27,13 @@ export function handleError(err: Error, res: Response) {
     });
   } else {
     logger.error(err);
-    const { message, statusCode } = Errors.InternalError;
+    const { message, statusCode } = CommonError.InternalError;
 
     res.status(statusCode).json({
       statusCode,
       message,
       timestamp: new Date().toISOString(),
+      error: err.message,
     });
   }
 }

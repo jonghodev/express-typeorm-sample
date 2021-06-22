@@ -1,10 +1,10 @@
 import express, { Request, Response } from 'express';
-import userApi from './user/userApi';
+import commonApi from './common/common.api';
+import userApi from './user/user.api';
+import hmacApi from './hmac/hmac.api';
 
 export const router = express.Router();
 
+router.use('/', commonApi);
 router.use('/user', userApi);
-
-router.get('/health', (req: Request, res: Response) =>
-  res.status(200).send('Server is healthy!'),
-);
+router.use('/hmac', hmacApi);

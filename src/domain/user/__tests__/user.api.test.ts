@@ -1,19 +1,19 @@
 import faker from 'faker';
 import request from 'supertest';
 import { Express } from 'express';
-import db from '@/utils/db';
+import mongo from '@/utils/mongo';
 import { createServer } from '@/express';
 import { createDummyUser } from '@/tests/userDummy';
-import { login } from '@/domain/user/userService';
+import { login } from '@/domain/user/user.service';
 
 let server: Express;
 beforeAll(async () => {
-  await db.open();
-  server = await createServer();
+  await mongo.open();
+  server = createServer();
 });
 
 afterAll(async () => {
-  await db.close();
+  await mongo.close();
 });
 
 describe('POST /user/signup', () => {

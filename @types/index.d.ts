@@ -1,4 +1,4 @@
-import { User } from '../src/domain/user/userEntity'; // <- User class
+import { User } from '@/domain/user/user.entity'; // <- User class
 
 declare global {
   namespace Express {

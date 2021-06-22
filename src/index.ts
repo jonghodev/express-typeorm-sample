@@ -1,9 +1,12 @@
-import db from '@/utils/db';
+import mongo from '@/utils/mongo';
 import { createServer } from '@/express';
 import logger from '@/utils/logger';
 import config from '@/utils/config';
+import typeorm from '@/utils/typeorm';
 
-db.open()
+mongo
+  .open()
+  .then(() => typeorm.open())
   .then(() => createServer())
   .then((server) =>
     server.listen(config.port, () => {
