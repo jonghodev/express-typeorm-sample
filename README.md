@@ -2,16 +2,12 @@
 
 ## Tech
 
----
-
 - Express
 - Typescript
 - Typeorm
 - Mongoose
 
 ## Script
-
----
 
 ```bash
 # Dev 모드로 서버를 실행합니다.
@@ -26,8 +22,6 @@ yarn prettier
 ```
 
 ## Security
-
----
 
 Hmac 과 JWT 인증을 사용하고 있습니다.
 
@@ -46,13 +40,9 @@ JWS 기반 인증 시스템을 사용합니다.
 
 ## Logging
 
----
-
 `Winson` 과 `Morgan` 라이브러리를 사용하고 있습니다. `Morgan` 라이브러리를 이용해 Request Body 와 Response Body 를 출력하고, Winson 라이브러리를 통해 로그를 찍으며, `logs/` 하위 디렉토리에 일자별로 로그를 저장합니다.
 
 ## Config
-
----
 
 `config/` 하위 디렉토리에 각 환경에 따른 `env` 파일을 저장하면 됩니다.
 
@@ -62,8 +52,6 @@ JWS 기반 인증 시스템을 사용합니다.
 - `.env.test` : NODE_ENV=test
 
 ## Test
-
----
 
 `Jest` 와 `supertest` 를 사용합니다. 테스트 시 DB 는 In memory DB 를 사용합니다. MongoDB 에서는 `mongodb-memory-server` 를 사용하고 RDB 에서는 `Mysql` 대신 `sqlite3` 를 사용합니다.
 
