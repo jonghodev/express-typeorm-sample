@@ -1,8 +1,8 @@
 import express from 'express';
 import { Joi, validate } from 'express-validation';
-import { verifyHmacSuper } from '../../middleware/authentication';
 import { HmacRole } from '@/domain/hmac/hmac.entity';
 import { createHmac } from '@/domain/hmac/hmac.service';
+import { verifyHmacSuper } from '@/middleware/authentication';
 
 const router = express.Router();
 
