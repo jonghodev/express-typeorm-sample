@@ -8,7 +8,7 @@ export function verifyMessage(
   url: string,
   hmacId: string,
   timestamp: string,
-  body: any = '',
+  body: any = {},
 ) {
   verifyTimestamp(timestamp);
 
@@ -36,7 +36,7 @@ export function hashMessage(
   url: string,
   hmacId: string,
   timestamp: string,
-  body: any = '',
+  body: any = {},
 ) {
   const message = createMessage(method, url, hmacId, timestamp, body);
   const hash = createHmac('sha256', secret)
@@ -52,7 +52,7 @@ function createMessage(
   url: string,
   hmacId: string,
   timestamp: string,
-  body: any = '',
+  body: any = {},
 ) {
   const hmacMessage = method
     .concat(url)

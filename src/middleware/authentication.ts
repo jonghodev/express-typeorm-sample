@@ -71,7 +71,7 @@ async function verifyHmac(req: Request) {
   if (error) throw new CustomError(CommonError.InvalidHeader);
 
   const { 'hmac-id': hmacId, sig, timestamp } = value;
-  const { method, baseUrl: url, body = '' } = req;
+  const { method, originalUrl: url, body = '' } = req;
 
   const hmac = await Hmac.getById(hmacId);
 
