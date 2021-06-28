@@ -4,6 +4,23 @@ import config from '@/utils/config';
 import { NodeEnv } from '@/utils/constants';
 
 /**
+ * Error format function
+ */
+const enumerateErrorFormat = winston.format((info) => {
+  if (info instanceof Error) {
+    return Object.assign(
+      {
+        message: info.message,
+        stack: info.stack,
+      },
+      info,
+    );
+  }
+
+  return info;
+});
+
+/**
  * Winston printf function
  */
 const prettyJson = winston.format.printf((info) => {
@@ -27,6 +44,7 @@ const logger = winston.createLogger({
   level: config.logLevel,
   format: winston.format.combine(
     winston.format.timestamp({ format: 'YY-MM-DD HH:mm:ss' }),
+    enumerateErrorFormat(),
     prettyJson,
   ),
   transports: [
