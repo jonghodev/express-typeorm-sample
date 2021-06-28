@@ -23,6 +23,5 @@ module.exports = {
     'object-curly-newline': 'off',
     camelcase: 0,
     'no-console': 'off',
-    'max-len': 'off',
   },
 };
