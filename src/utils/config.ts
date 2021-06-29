@@ -25,24 +25,24 @@ let env = dotenv.config({
 }).parsed!;
 
 interface Config {
-  nodeEnv: NodeEnv;
-  hmac: {
-    id: string;
-    secret: string;
+  readonly nodeEnv: NodeEnv;
+  readonly hmac: {
+    readonly id: string;
+    readonly secret: string;
   };
-  port: number;
-  logLevel: string;
-  mongo: {
-    url: string;
+  readonly port: number;
+  readonly logLevel: string;
+  readonly mongo: {
+    readonly url: string;
   };
-  typeorm: {
-    url: string;
-    database: string;
-    port: number;
-    username: string;
-    password: string;
+  readonly typeorm: {
+    readonly url: string;
+    readonly database: string;
+    readonly port: number;
+    readonly username: string;
+    readonly password: string;
   };
-  jwtSecret: string;
+  readonly jwtSecret: string;
 }
 
 const config: Config = {
