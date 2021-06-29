@@ -24,7 +24,7 @@ interface ErrorFormat {
   error?: any;
 }
 
-export function handleError(err: Error, res: Response) {
+export function handleError(err: Error | ValidationError, res: Response) {
   /**
    * For stack tracing
    */
