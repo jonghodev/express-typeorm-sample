@@ -41,7 +41,7 @@ export default class Hmac extends BaseEntity {
     return this.findOne({ id });
   }
   static async getById(id: string) {
-    const entity = await this.findOne({ id });
+    const entity = await this.findById(id);
     if (!entity) {
       throw new CustomError(CommonError.EntityNotFound);
     }
