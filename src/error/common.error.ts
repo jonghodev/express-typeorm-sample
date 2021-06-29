@@ -1,6 +1,7 @@
 export interface ErrorBody {
   message: string;
   statusCode: number;
+  details?: any;
 }
 
 export const CommonError = {
