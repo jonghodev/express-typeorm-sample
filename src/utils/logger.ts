@@ -1,7 +1,6 @@
 import winston from 'winston';
 import winstonDaily from 'winston-daily-rotate-file';
 import config from '@/utils/config';
-import { NodeEnv } from '@/utils/constants';
 
 /**
  * Error format function
@@ -67,24 +66,6 @@ const logger = winston.createLogger({
     }),
   ],
 });
-
-/**
- * 운영 환경이 아닐 경우 로그 커스터마이징
- */
-if (process.env.NODE_ENV !== NodeEnv.Prod) {
-  logger.add(
-    new winston.transports.Console({
-      format: winston.format.combine(
-        winston.format.colorize(),
-        winston.format.prettyPrint(),
-        winston.format.splat(),
-        winston.format.simple(),
-        winston.format.timestamp({ format: 'YY-MM-DD HH:mm:ss' }),
-        prettyJson,
-      ),
-    }),
-  );
-}
 
 export default logger;
 

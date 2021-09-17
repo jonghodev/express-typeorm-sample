@@ -1,0 +1,7 @@
+﻿# the first image use node image as the builder because it has git program
+FROM mysql:8.0.25
+
+ENV MYSQL_ROOT_PASSWORD="0302"
+ENV MYSQL_PASSWORD="H+Z^qb2?@;:JtLf2"
+ENV MYSQL_USER="seaman_dapp"
+ENV MYSQL_DATABASE="dapp"

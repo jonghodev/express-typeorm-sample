@@ -5,7 +5,7 @@
   "main": "src/index.ts",
   "scripts": {
     "dev": "TS_NODE_TRANSPILE_ONLY=true NODE_ENV=dev nodemon --exec ts-node -r tsconfig-paths/register --files src/index.ts",
-    "start": "NODE_ENV=prod node dist/index.js",
+    "prod": "TS_NODE_TRANSPILE_ONLY=true NODE_ENV=prod ts-node -r tsconfig-paths/register src/index.ts",
     "build": "tsc",
     "prettier": "prettier --write ."
   },
